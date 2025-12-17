@@ -33,23 +33,23 @@ A **Tree** is a hierarchical non-linear data structure consisting of nodes conne
 | **Height of Tree** | Height of the root node |
 | **Depth / Level** | Distance from the root (root is at level 0) |
 | **Binary Tree** | Tree where each node has at most 2 children |
-| **BST** | Binary Search Tree: \`left < root < right\` |
+| **BST** | Binary Search Tree: `left < root < right` |
 
 ### 🎯 Visual Representation
 
-\`\`\`
+```
         1          ← Root (Level 0)
        / \
       2   3        ← Level 1
      / \   \
     4   5   6      ← Level 2 (4, 5, 6 are leaf nodes)
-\`\`\`
+```
 
 ---
 
 ## 📌 2. TreeNode Structure (C++)
 
-\`\`\`cpp
+```cpp
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -57,14 +57,14 @@ struct TreeNode {
     
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
-\`\`\`
+```
 
 **Usage:**
-\`\`\`cpp
+```cpp
 TreeNode* root = new TreeNode(1);
 root->left = new TreeNode(2);
 root->right = new TreeNode(3);
-\`\`\`
+```
 
 ---
 
@@ -72,9 +72,9 @@ root->right = new TreeNode(3);
 
 ### 🟩 Queue — For BFS
 
-\`\`\`cpp
+```cpp
 queue<TreeNode*> q;
-\`\`\`
+```
 
 **Used for:**
 - ✅ Level order traversal
@@ -87,9 +87,9 @@ queue<TreeNode*> q;
 
 ### 🟦 Stack — For DFS (Iterative)
 
-\`\`\`cpp
+```cpp
 stack<TreeNode*> st;
-\`\`\`
+```
 
 **Used for:**
 - ✅ Iterative inorder
@@ -100,18 +100,18 @@ stack<TreeNode*> st;
 
 ### 🟨 Vector — Store Traversals / Levels
 
-\`\`\`cpp
+```cpp
 vector<int> ans;
 vector<vector<int>> levels;
-\`\`\`
+```
 
 ---
 
 ### 🟥 Pair — For (node, level) or (node, distance)
 
-\`\`\`cpp
+```cpp
 queue<pair<TreeNode*, int>> q;
-\`\`\`
+```
 
 **Used in:**
 - ✅ Top view
@@ -126,16 +126,16 @@ queue<pair<TreeNode*, int>> q;
 
 #### ▶ Preorder (Root → Left → Right)
 
-\`\`\`cpp
+```cpp
 void preorder(TreeNode* root) {
     if (!root) return;
     cout << root->val << " ";
     preorder(root->left);
     preorder(root->right);
 }
-\`\`\`
+```
 
-**Output for example tree:** \`1 2 4 5 3 6\`
+**Output for example tree:** `1 2 4 5 3 6`
 
 ---
 
@@ -143,31 +143,31 @@ void preorder(TreeNode* root) {
 
 > 💡 **For BST → inorder gives sorted order**
 
-\`\`\`cpp
+```cpp
 void inorder(TreeNode* root) {
     if (!root) return;
     inorder(root->left);
     cout << root->val << " ";
     inorder(root->right);
 }
-\`\`\`
+```
 
-**Output for example tree:** \`4 2 5 1 3 6\`
+**Output for example tree:** `4 2 5 1 3 6`
 
 ---
 
 #### ▶ Postorder (Left → Right → Root)
 
-\`\`\`cpp
+```cpp
 void postorder(TreeNode* root) {
     if (!root) return;
     postorder(root->left);
     postorder(root->right);
     cout << root->val << " ";
 }
-\`\`\`
+```
 
-**Output for example tree:** \`4 5 2 6 3 1\`
+**Output for example tree:** `4 5 2 6 3 1`
 
 ---
 
@@ -175,7 +175,7 @@ void postorder(TreeNode* root) {
 
 #### ▶ BFS Template
 
-\`\`\`cpp
+```cpp
 vector<vector<int>> levelOrder(TreeNode* root) {
     vector<vector<int>> res;
     if (!root) return res;
@@ -200,9 +200,9 @@ vector<vector<int>> levelOrder(TreeNode* root) {
     
     return res;
 }
-\`\`\`
+```
 
-**Output for example tree:** \`[[1], [2, 3], [4, 5, 6]]\`
+**Output for example tree:** `[[1], [2, 3], [4, 5, 6]]`
 
 ---
 
@@ -210,12 +210,12 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 ### 🔸 5.1 Height of a Tree
 
-\`\`\`cpp
+```cpp
 int height(TreeNode* root) {
     if (!root) return 0;
     return 1 + max(height(root->left), height(root->right));
 }
-\`\`\`
+```
 
 **Time Complexity:** O(n)  
 **Space Complexity:** O(h) — recursion stack
@@ -224,12 +224,12 @@ int height(TreeNode* root) {
 
 ### 🔸 5.2 Count Nodes
 
-\`\`\`cpp
+```cpp
 int countNodes(TreeNode* root) {
     if (!root) return 0;
     return 1 + countNodes(root->left) + countNodes(root->right);
 }
-\`\`\`
+```
 
 ---
 
@@ -237,7 +237,7 @@ int countNodes(TreeNode* root) {
 
 > A tree is balanced if the height difference between left and right subtrees is ≤ 1 for all nodes.
 
-\`\`\`cpp
+```cpp
 int check(TreeNode* root) {
     if (!root) return 0;
     
@@ -255,7 +255,7 @@ int check(TreeNode* root) {
 bool isBalanced(TreeNode* root) {
     return check(root) != -1;
 }
-\`\`\`
+```
 
 ---
 
@@ -263,7 +263,7 @@ bool isBalanced(TreeNode* root) {
 
 > Longest path between any two nodes (may or may not pass through root).
 
-\`\`\`cpp
+```cpp
 int diameter = 0;
 
 int dfs(TreeNode* root) {
@@ -275,9 +275,9 @@ int dfs(TreeNode* root) {
     diameter = max(diameter, left + right);
     return 1 + max(left, right);
 }
-\`\`\`
+```
 
-**Call:** \`dfs(root);\` then check \`diameter\`
+**Call:** `dfs(root);` then check `diameter`
 
 ---
 
@@ -285,7 +285,7 @@ int dfs(TreeNode* root) {
 
 > Rightmost node at each level.
 
-\`\`\`cpp
+```cpp
 vector<int> rightView(TreeNode* root) {
     vector<int> res;
     if (!root) return res;
@@ -310,9 +310,9 @@ vector<int> rightView(TreeNode* root) {
     
     return res;
 }
-\`\`\`
+```
 
-**Output for example tree:** \`[1, 3, 6]\`
+**Output for example tree:** `[1, 3, 6]`
 
 ---
 
@@ -320,7 +320,7 @@ vector<int> rightView(TreeNode* root) {
 
 > Alternate left-to-right and right-to-left at each level.
 
-\`\`\`cpp
+```cpp
 vector<vector<int>> zigzag(TreeNode* root) {
     vector<vector<int>> res;
     if (!root) return res;
@@ -349,19 +349,19 @@ vector<vector<int>> zigzag(TreeNode* root) {
     
     return res;
 }
-\`\`\`
+```
 
-**Output for example tree:** \`[[1], [3, 2], [4, 5, 6]]\`
+**Output for example tree:** `[[1], [3, 2], [4, 5, 6]]`
 
 ---
 
 ## 📌 6. Binary Search Tree (BST)
 
-> **Property:** For every node: \`left subtree < node < right subtree\`
+> **Property:** For every node: `left subtree < node < right subtree`
 
 ### ▶ Insert into BST
 
-\`\`\`cpp
+```cpp
 TreeNode* insertBST(TreeNode* root, int val) {
     if (!root) return new TreeNode(val);
     
@@ -372,13 +372,13 @@ TreeNode* insertBST(TreeNode* root, int val) {
     
     return root;
 }
-\`\`\`
+```
 
 ---
 
 ### ▶ Search in BST
 
-\`\`\`cpp
+```cpp
 bool searchBST(TreeNode* root, int key) {
     if (!root) return false;
     if (root->val == key) return true;
@@ -387,7 +387,7 @@ bool searchBST(TreeNode* root, int key) {
         ? searchBST(root->left, key) 
         : searchBST(root->right, key);
 }
-\`\`\`
+```
 
 **Time Complexity:** O(h) where h = height  
 **Best Case:** O(log n) — balanced BST  
@@ -401,11 +401,11 @@ bool searchBST(TreeNode* root, int key) {
 
 | Container | Usage | Purpose |
 |-----------|-------|---------|
-| \`queue<TreeNode*>\` | BFS | Level order, views, width |
-| \`stack<TreeNode*>\` | DFS | Iterative traversals |
-| \`vector<int>\` | Output | Store single traversal |
-| \`vector<vector<int>>\` | Output | Store level-wise data |
-| \`pair<TreeNode*, int>\` | BFS | Track (node, level/distance) |
+| `queue<TreeNode*>` | BFS | Level order, views, width |
+| `stack<TreeNode*>` | DFS | Iterative traversals |
+| `vector<int>` | Output | Store single traversal |
+| `vector<vector<int>>` | Output | Store level-wise data |
+| `pair<TreeNode*, int>` | BFS | Track (node, level/distance) |
 
 ---
 
@@ -427,7 +427,7 @@ bool searchBST(TreeNode* root, int key) {
 
 ## 📌 9. Recommended Practice Sequence
 
-\`\`\`
+```
 1. Traversals (Pre/In/Post/Level)
    ↓
 2. Height / Count
@@ -445,19 +445,19 @@ bool searchBST(TreeNode* root, int key) {
 8. Path Sum
    ↓
 9. Construct Tree from traversals
-\`\`\`
+```
 
 ---
 
-## �� Quick Reference Card
+## 🎯 Quick Reference Card
 
 | Problem | Approach | Key Data Structure |
 |---------|----------|-------------------|
-| Level Order | BFS | \`queue<TreeNode*>\` |
+| Level Order | BFS | `queue<TreeNode*>` |
 | Height | DFS | Recursion |
 | Diameter | DFS + Global Variable | Recursion |
-| Right View | BFS (last node per level) | \`queue<TreeNode*>\` |
-| Zigzag | BFS + Reverse Flag | \`queue<TreeNode*>\` |
+| Right View | BFS (last node per level) | `queue<TreeNode*>` |
+| Zigzag | BFS + Reverse Flag | `queue<TreeNode*>` |
 | BST Search | Binary Search Logic | Recursion/Iteration |
 | Balanced | DFS + Height Check | Recursion |
 

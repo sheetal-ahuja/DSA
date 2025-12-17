@@ -12,7 +12,6 @@ public:
 
         for(int i = 0; i<n-1;i++)
         {
-
             left = left + nums[i];
             int right = sum - left;
             int diff = left - right;
